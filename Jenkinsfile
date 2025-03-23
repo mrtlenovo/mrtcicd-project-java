@@ -59,7 +59,7 @@ pipeline {
                  sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
                      -Dsonar.projectName=vprofile-repo \
                      -Dsonar.projectVersion=1.0 \
-                     -Dsonar.sources=/var/lib/jenkins/workspace/mrt-ci-pipeline-java/ \
+                     -Dsonar.sources=/var/lib/jenkins/workspace/mrtcicd-pipeline-java/ \
                      -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
                      -Dsonar.exclusions=**/*.js,**/*.ts,**/*.css,**/*.jps \
                      -Dsonar.junit.reportsPath=target/surefire-reports/ \
