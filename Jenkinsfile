@@ -16,7 +16,7 @@ pipeline {
         NEXUS_PASS = 'test@123'
         RELEASE_REPO = 'vprofile-release'
         CENTRAL_REPO = 'vpro-maven-central'
-        NEXUS_IP = '10.129.2.73'
+        NEXUS_IP = '10.129.2.195'
         NEXUS_PORT = '8081'
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexus-creds'
