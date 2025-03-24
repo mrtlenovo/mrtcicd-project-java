@@ -1,0 +1,72 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <localRepository>/path/to/local/repo</localRepository>
+
+    <mirrors>
+        <mirror>
+            <id>nexus-mirror</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://nexus.example.com/repository/maven-public/</url>
+        </mirror>
+    </mirrors>
+
+    <servers>
+        <server>
+            <id>nexus</id>
+            <username>${env.NEXUS_CREDENTIALS_USR}</username>
+            <password>${env.NEXUS_CREDENTIALS_PSW}</password>
+        </server>
+        <server>
+            <id>sonar</id>
+            <username>${env.SONAR_TOKEN}</username>
+            <password></password>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://nexus.example.com/repository/maven-central/</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>snapshots</id>
+                    <url>http://nexus.example.com/repository/maven-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </repository>
+            </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://nexus.example.com/repository/maven-central/</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>snapshots</id>
+                    <url>http://nexus.example.com/repository/maven-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>nexus</activeProfile>
+    </activeProfiles>
+
+</settings>
