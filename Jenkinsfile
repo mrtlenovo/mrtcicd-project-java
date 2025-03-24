@@ -6,7 +6,7 @@ def COLOR_MAP = [
 pipeline {
     agent any
     tools {
-        maven "MAVEN3"
+        maven "maven3"
         jdk "java-11-openjdk"
     }
 
@@ -20,7 +20,7 @@ pipeline {
         NEXUS_PORT = '8081'
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexus-creds'
-        SONARSERVER = 'sonarserver'
+        SONARSERVER = 'SonarQube'
         SONARSCANNER = 'sonarscanner'
     }
 
