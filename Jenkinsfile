@@ -5,6 +5,7 @@ def COLOR_MAP = [
 
 pipeline {
     agent any
+
     tools {
         maven "maven3"
         jdk "jdk17"
@@ -28,7 +29,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Inject the Jenkins managed Maven settings.xml file dynamically
                 configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
                     sh 'mvn -s $MAVEN_SETTINGS -DskipTests install'
                 }
@@ -101,4 +101,23 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            script {
+                def currentStatus = currentBuild.result ?: 'SUCCESS'
+                echo "Build result: ${currentStatus}"
+                sendSlackNotification(currentStatus, "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
+            }
+            cleanWs()
+        }
+    }
+}
+
+def sendSlackNotification(status, jobName, buildNumber) {
+    def color = COLOR_MAP[status] ?: 'warning'
+    slackSend(
+        color: color,
+        message: "*${jobName}* build #${buildNumber} finished with status: *${status}*."
+    )
 }
